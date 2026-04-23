@@ -32,6 +32,28 @@ Each provider may have its own settings. For example, Brandfetch requires a clie
 
 Copy `main.js`, `manifest.json`, and `styles.css` into your vault at `.obsidian/plugins/brand-icons/`, then enable the plugin in settings.
 
+## Architecture
+
+```
+src/
+  main.ts             Plugin lifecycle, registers renderers and settings
+  parse.ts            Regex tokenizer -> BrandToken {domain, variant?, size?}
+  brand-element.ts    BrandToken -> <img> via provider.buildUrl()
+  post-processor.ts   Reading mode: DOM TreeWalker replaces text nodes
+  editor-extension.ts Live preview: CodeMirror 6 decorations, reveals syntax at cursor
+  settings.ts         Settings interface + dynamic provider-driven UI
+  providers/
+    provider.ts       BrandProvider interface + registry
+    brandfetch.ts     Brandfetch CDN implementation
+styles.css            Single rule using Obsidian CSS variables
+```
+
+**Data flow:** text node -> `findBrandSpans()` -> `BrandToken` -> `createBrandImg()` -> `provider.buildUrl()` -> `<img>`
+
+## Adding a provider
+
+Create a new file in `src/providers/`, implement the `BrandProvider` interface, and push it to the `providers` array. No other files need changes. The settings UI and URL building are driven entirely by the interface.
+
 ## Development
 
 ```sh
