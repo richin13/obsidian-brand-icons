@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "obsidian": {
+      "source": "gapmiss/obsidian-plugin-skill",
+      "sourceType": "github",
+      "computedHash": "f3ab4f4c8fb1c575c9499cdb0f13758b30a2028df7ce84ac64fe525873a7b778"
+    }
+  }
+}
