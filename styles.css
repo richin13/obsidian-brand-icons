@@ -1,0 +1,6 @@
+.brand-icons-inline {
+	height: var(--font-text-size);
+	vertical-align: middle;
+	display: inline;
+	margin: 0 2px;
+}
