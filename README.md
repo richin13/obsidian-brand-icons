@@ -4,6 +4,8 @@ Display brand logos and icons inline in your Obsidian notes.
 
 Write `:brand:github.com:` in your note and it renders as an inline icon right next to your text.
 
+![screenshot](assets/screenshot.png)
+
 ## Syntax
 
 ```
