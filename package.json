@@ -5,9 +5,12 @@
   "main": "main.js",
   "scripts": {
     "dev": "node esbuild.config.mjs",
-    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production"
+    "build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
+    "check": "biome check",
+    "format": "biome format --write"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.4.13",
     "@codemirror/state": "^6.0.0",
     "@codemirror/view": "^6.0.0",
     "@types/node": "^16.11.6",

@@ -1,36 +1,30 @@
-import { Plugin } from "obsidian";
-import "./providers/brandfetch";
+import { Plugin } from "obsidian"
+import "./providers/brandfetch"
+import { brandIconExtension } from "./editor-extension"
+import { brandIconPostProcessor } from "./post-processor"
 import {
-	BrandIconSettingTab,
-	DEFAULT_SETTINGS,
-	type BrandIconSettings,
-} from "./settings";
-import { brandIconPostProcessor } from "./post-processor";
-import { brandIconExtension } from "./editor-extension";
+  type BrandIconSettings,
+  BrandIconSettingTab,
+  DEFAULT_SETTINGS,
+} from "./settings"
 
 export default class BrandIconPlugin extends Plugin {
-	settings: BrandIconSettings = DEFAULT_SETTINGS;
+  settings: BrandIconSettings = DEFAULT_SETTINGS
 
-	async onload(): Promise<void> {
-		await this.loadSettings();
+  async onload(): Promise<void> {
+    await this.loadSettings()
 
-		this.registerMarkdownPostProcessor(
-			brandIconPostProcessor(this.settings)
-		);
-		this.registerEditorExtension(brandIconExtension(this));
+    this.registerMarkdownPostProcessor(brandIconPostProcessor(this.settings))
+    this.registerEditorExtension(brandIconExtension(this))
 
-		this.addSettingTab(new BrandIconSettingTab(this.app, this));
-	}
+    this.addSettingTab(new BrandIconSettingTab(this.app, this))
+  }
 
-	async loadSettings(): Promise<void> {
-		this.settings = Object.assign(
-			{},
-			DEFAULT_SETTINGS,
-			await this.loadData()
-		);
-	}
+  async loadSettings(): Promise<void> {
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData())
+  }
 
-	async saveSettings(): Promise<void> {
-		await this.saveData(this.settings);
-	}
+  async saveSettings(): Promise<void> {
+    await this.saveData(this.settings)
+  }
 }
